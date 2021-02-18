@@ -1,0 +1,28 @@
+snippet asdlolomat "Description" b
+local snippet = {}
+        for i,v in ipairs(data) do
+              if i > linenr then
+                if v ~= 'endsnippet' then
+                  table.insert(snippet, v)
+                elseif v == 'endsnippet' then
+                  --table.insert(snippet, v)
+                  break  
+                end
+              end
+        end
+
+endsnippet
+
+
+
+
+snippet lolzorz2 "Description" b
+ions.close(prompt_bufnr)
+endsnippet
+
+
+
+
+snippet lolzorz2 "Description" b
+ions.close(prompt_bufnr)
+endsnippet
