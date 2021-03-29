@@ -5,16 +5,42 @@ local status = require('plugin/lsp/status')
 local completion = require('completion')
 local ultipreview = require('ultipreview')
 
+local log1 = require'log1'
+
+
+
+-- sumneko lua language server setup cross platform
+local system_name
+if vim.fn.has("mac") == 1 then
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
+end
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath('config')..'/lspserver/lua-language-server'
-local sumneko_binary = sumneko_root_path..'/bin/Windows/lua-language-server'
+local sumneko_root_path = vim.fn.stdpath('data')..'/lspserver/lua-language-server'
+local sumneko_binary = sumneko_root_path..'/bin/'..system_name..'/lua-language-server'
 
 
-local custom_attach = function(client)
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+local custom_attach = function()
+-- local bufpath = vim.api.nvim_buf_get_name(0)
+--   local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
 
-completion.on_attach(client)
+
+-- if bufpath:match('/printoutput[^.]*.lua') ~= nil then
+-- log1.info('lsp attached to')
+-- log1.info(bufpath)
+
+completion.on_attach()
 ultipreview.on_attach()
+
+-- else
+-- -- important : to not attach lsp to printoutput
+-- end
+
 
 end
 
@@ -54,9 +80,11 @@ require'lspconfig'.sumneko_lua.setup {
       diagnostics = {
         enable=true,
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = {'vim', 'l', 'p', 'po' },
+        disable = { 'empty-block' }
       },
       workspace = {
+        ignoreDir = { '.printoutput' },
         maxPreload = 1000000,
         -- Make the server aware of Neovim runtime files
         library = {
@@ -71,7 +99,7 @@ require'lspconfig'.sumneko_lua.setup {
 
 require'lspconfig'.vimls.setup{
   on_attach = custom_attach,
-cmd = { "vim-language-server.cmd", "--stdio" },
+cmd = { "vim-language-server", "--stdio" },
     filetypes = { "vim" },
     init_options = {
       diagnostic = {
@@ -95,6 +123,21 @@ cmd = { "vim-language-server.cmd", "--stdio" },
     }
 
 
+
+
+
+
+
+require'lspconfig'.bashls.setup{
+    on_attach = custom_attach,
+cmd = { "bash-language-server", "start" },
+    cmd_env = {
+      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
+    },
+    filetypes = { 'sh', 'bash', 'zsh', 'term' },
+   -- root_dir = , -- vim's starting directorya
+}
+
 -- require'lspconfig'.tsserver.setup{on_attach = custom_attach}
 
 
@@ -114,7 +157,26 @@ require'lspconfig'.tsserver.setup({
 
 
 
+require'lspconfig'.yamlls.setup{
+    on_attach = custom_attach,
+cmd = { "yaml-language-server", "--stdio" },
+    filetypes = { "yaml", "yml" },
+   -- root_dir = root_pattern(".git", vim.fn.getcwd())
 
+}
+
+
+require'lspconfig'.jsonls.setup{
+
+cmd = { "vscode-json-languageserver", "--stdio" },
+    filetypes = { "json" },
+    init_options = {
+      provideFormatter = true
+    },
+   -- root_dir = root_pattern(".git", vim.fn.getcwd())
+}
+
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 
 

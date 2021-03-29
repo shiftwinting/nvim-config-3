@@ -1,35 +1,25 @@
- if exists('g:fvim_loaded')
-     " good old 'set guifont' compatibility
- "    set guifont=Iosevka\ Slab:h16
-     " Ctrl-ScrollWheel for zooming in/out
-    " nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
-    " nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
-   " nnoremap <A-CR> :FVimToggleFullScreen<CR>
-
-" FVimCustomTitleBar v:false 
+"set lines=40
+"set columns=120
 
 
-" FVimUIPopupMenu v:true 
+set title
+let &titlestring=v:servername
 
-" FVimUIMultiGrid v:true     " per-window grid system -- work in progress
-" FVimUIPopupMenu v:false      " external popup menu
-" FVimUITabLine v:false       " external tabline -- not implemented
-" FVimUICmdLine v:false       " external cmdline -- not implemented
-" FVimUIWildMenu v:false      " external wildmenu -- not implemented
-" FVimUIMessages v:false      " external messages -- not implemented
-" FVimUITermColors v:false    " not implemented
-" FVimUIHlState v:false
-endif
+
+
+" neovide settings
+"let g:neovide_cursor_antialiasing=v:true
+"let g:neovide_no_idle=v:true
+
+"        !/mnt/c/Program\ Files/AutoHotkey/AutoHotkey.exe c:/Users/F1/scripts/ahk/AAMain/winpos/neovide1.ahk
+
+"execute 'silent !/mnt/c/Program\ Files/AutoHotkey/AutoHotkey.exe c:/Users/F1/scripts/ahk/AAMain/winpos/neovide2.ahk'
+ 
 
 
 " set font for neovide
-" set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h12
+"  set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h14
+"set guifont=CaskaydiaCove\ Nerd\ Font:h14
+ "set guifont=Cantarell-Light:h14
 
-
-" nvim-qt settings
-" ! suppresses warnings
-Guifont! CaskaydiaCove Nerd Font Mono:h12
-GuiPopupmenu 0
-GuiTabline 0
-
-
+set guifont=MergedCascadia4:h14

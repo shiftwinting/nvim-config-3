@@ -3,21 +3,9 @@ local utils = require('utils')
 
 local gls = gl.section
 
+local colors = require('futil/colors').colors
 
--- Colors
-local colors = {
-  bg = '#282a36',
-  fg = '#f8f8f2',
-  section_bg = '#38393f',
-  yellow = '#f1fa8c',
-  cyan = '#8be9fd',
-  green = '#50fa7b',
-  orange = '#ffb86c',
-  magenta = '#ff79c6',
-  blue = '#8be9fd',
-  red = '#ff5555'
-}
-
+local log1 = require('log1')
 -- Local helper functions
 local buffer_not_empty = function()
   -- had to be outside of any loaded lua file on init
@@ -38,12 +26,15 @@ local mode_color = function()
     [''] = colors.magenta,
     v = colors.magenta,
     R = colors.red,
+    t = colors.green,
   }
 
   return mode_colors[vim.fn.mode()]
 end
 
--- Left side
+vim.cmd([[hi StatusLine guibg=]] .. colors.section_bg)
+
+-- Left sidei
 -- gls.left[1] = {
 --   FirstElement = {
 --     provider = function() return '▋' end,
@@ -61,23 +52,73 @@ gls.left[1] = {
         [''] = 'VISUAL',
         v = 'VISUAL',
         R = 'REPLACE',
+        t = 'TERMINAL',
       }
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color())
+        --log1.info(vim.fn.mode())
+        vim.api.nvim_command('hi GalaxyViMode guifg='..
+        mode_color())
       return alias[vim.fn.mode()]..' '
+            
     end,
     highlight = { colors.bg, colors.bg },
     separator = "  ",
     separator_highlight = {colors.bg, colors.section_bg},
   },
 }
-gls.left[2] ={
+gls.left[7] = {
+    Luapadexist = {
+    provider = function()
+      --lo(pcall(require'luapad/statusline'.status))
+       -- if pcall(require'luapad/statusline'.status) ~= true then return end
+        local luapad_status = require'luapad/statusline'.status()
+            if luapad_status == 'ok' then
+                return 'LUAPAD'             
+            else
+                return ''
+            end
+          --  log1.info(luapad_status)
+        end,
+  condition = function()
+      if pcall(require'luapad/statusline'.status) == true then return true else return false end
+    end
+
+    },
+  }
+gls.left[8] = {
+    Luapadauto = {
+    provider = function()
+      --if pcall(require'luapad/statusline'.status) ~= true then return end
+        local luapad_status = require'luapad/statusline'.status()
+            if luapad_status == 'ok' then
+             --   log1.info('gets here')
+                if vim.g.eval_on_change == true then
+                --     l('auto turned on')
+                    return 'auto-ON' 
+                else
+              --  l('auto off')
+                return 'auto-OFF'
+                end
+            else
+            -- l('nothing')
+                 return ''
+             end
+          --  log1.info(luapad_status)
+        end, -- end of provider
+   condition = function() 
+      
+        if pcall(require'luapad/statusline'.status) == true then return true else return false end
+    end
+
+    },
+ }
+gls.left[3] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = buffer_not_empty,
     highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.section_bg },
   },
 }
-gls.left[3] = {
+gls.left[4] = {
   FileName = {
     provider = { 'FileName'},
     condition = buffer_not_empty,
@@ -109,7 +150,7 @@ gls.left[15] = {
     separator_highlight = { colors.section_bg, colors.bg },
   }
 }
-gls.left[15] = {
+gls.left[16] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = ' 💡 ',
@@ -127,3 +168,14 @@ gls.left[15] = {
 --     end
 --   }
 -- }
+
+
+gls.right[1] = {
+  Cwd = {
+    provider = function() return vim.fn.getcwd() end,
+   -- icon = ' 💡 ',
+    highlight = {colors.blue,colors.section_bg},
+   -- separator = ' ',
+    separator_highlight = { colors.section_bg, colors.bg },
+  }
+}

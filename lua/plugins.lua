@@ -1,22 +1,25 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
+local packer_custom_updater = require 'plugin/packer_custom_updater'
+local log1 = require 'log1'
+
 -- orig: local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 -- install path for packer
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
   execute 'packadd packer.nvim'
 end
 
-
 local packer = nil
-local function init()
+local function init() -- only 1 function below here
+
   if packer == nil then
     packer = require('packer')
     util = require('packer.util')
     -- usein directory location
-    packer.init({disable_commands = true})
+    packer.init({disable_commands = true, opt_default = true})
   end
 
   local use = packer.use
@@ -24,157 +27,217 @@ local function init()
   packer.reset()
 
   -- Packer
--- how to put useins into separate folders:
--- use {'dracula/vim', as = 'dracula/draculaasd2'}
-use {'wbthomason/packer.nvim', opt = true}
+  -- how to put useins into separate folders:
+  -- use {'dracula/vim', as = 'dracula/draculaasd2'}
+  use {'wbthomason/packer.nvim', opt = true}
 
--- new plugins to try
--- use 'b3nj5m1n/kommentary'
--- use 'beauwilliams/statusline.lua'
-use 'tpope/vim-commentary'
-use 'akinsho/nvim-bufferline.lua' -- my own pick
+  -- tmux stuff
 
--- other bufferlines 
--- https://github.com/romgrk/barbar.nvim
+  -- use 'roxma/vim-tmux-clipboard' -- needed to make clipboard work
 
-use {
-  'glepnir/galaxyline.nvim',
-    branch = 'main',
-    -- your statusline
+  -- rocks
+
+  use_rocks {'luaformatter', server = 'https://luarocks.org/dev'}
+  use_rocks 'luacheck'
+  use_rocks 'luarepl'
+  -- use_rocks {'lua-format'}
+
+  use 'lukas-reineke/format.nvim'
+  -- didnt use this, error on format
+  -- use 'mhartington/formatter.nvim'
+
+  -- use 'nvim-telescope/telescope-z.nvim'
+  -- end rocks
+
+  -- a
+  -- new plugins to try
+  use 'b3nj5m1n/kommentary'
+  -- use 'beauwilliams/statusline.lua'
+  -- use 'tpope/vim-commentary'
+  use 'akinsho/nvim-bufferline.lua' -- my own pick
+
+  -- other bufferlines 
+  -- https://github.com/romgrk/barbar.nvim
+
+  use {
+    'glepnir/galaxyline.nvim',
+    branch = 'main'
+    -- your statusline/
     -- some optional icons
-    --requires = {'kyazdani42/nvim-web-devicons', opt = true}
-}
-
-
-use 'mhinz/vim-lookup'
------ end new plugins ----
-
-
--- telescope & extensions
-use 'nvim-lua/popup.nvim'
-use 'nvim-lua/plenary.nvim'
-use {
-'nvim-telescope/telescope.nvim',
-    depends = { 'kyazdani42/nvim-web-devicons', opt = true }
-}
-
-
-
-
-use 'nvim-telescope/telescope-packer.nvim'
-
--- lua 
-use 'rafcamlet/nvim-luapad'
-use 'bfredl/nvim-luadev'
-use 'tjdevries/nlua.nvim'
-use 'euclidianAce/BetterLua.vim'
--- use 'tjdevries/vlog.nvim'
--- use 'tjdevries/manillua.nvim'
-
-
--- lsp 
-use 'neovim/nvim-lspconfig'
-
- use 'nvim-lua/completion-nvim'
-
-use 'C:/Users/F1/AppData/Local/nvim/plugins-me/Ultipreview'
---use 'C:/Users/F1/AppData/Local/nvim/plugins-manual/completion-nvim'
-use 'tjdevries/lsp_extensions.nvim'
-use 'ncm2/float-preview.nvim'
-use 'glepnir/lspsaga.nvim'
-use 'kosayoda/nvim-lightbulb'
-use 'nvim-lua/lsp-status.nvim'
-
-
--- lsp snippets
-use 'honza/vim-snippets'
-use 'SirVer/ultisnips'
-
-
--- treesitter
--- use 'christianchiarulli/nvcode-color-schemes.vim'
-use 'nvim-treesitter/nvim-treesitter'
-use 'nvim-treesitter/playground'
-
-
---other 
-use 'equalsraf/neovim-gui-shim'
-
--- viml
--- use '907th/vim-auto-save'
-
-use {
-  'lambdalisue/fern.vim',
-    requires = {'lambdalisue/fern-renderer-nerdfont.vim', opt = true}
-}
-
-
-use { 
-  'kyazdani42/nvim-web-devicons',
-  commit = 'aaffb87',
-  opt = true
+    -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
 
+  use 'mhinz/vim-lookup'
+  ----- end new plugins ----
 
-use 'junegunn/fzf.vim'
-use 'mhinz/vim-startify'
+  -- telescope & extensions
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+
+  use 'nvim-telescope/telescope.nvim'
+  -- use {
+  -- 'nvim-telescope/telescope.nvim',
+  --     depends = { 'kyazdani42/nvim-web-devicons', opt = true }
+  -- }
+
+  use {'prettier/vim-prettier', run = 'npm install'}
+
+  use 'nvim-telescope/telescope-packer.nvim'
+  use 'nvim-telescope/telescope-snippets.nvim'
+  use 'fhill2/telescope-ultisnips.nvim'
+
+  use 'tami5/sql.nvim'
+  use 'nvim-telescope/telescope-cheat.nvim'
+
+  -- use 'nvim-telescope/telescope-frecency'
+
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function() require"telescope".load_extension("frecency") end
+  }
+
+  use 'nvim-telescope/telescope-fzy-native.nvim'
+
+  use '/home/f1/.config/nvim/plugins-me/telefrecency.nvim'
+
+  use 'norcalli/snippets.nvim'
+  -- lua 
+
+  use 'rafcamlet/nvim-luapad'
+ 
+ -- this is most current luapad
+ --  use '/home/f1/.config/nvim/plugins-manual/nvim-luapad'
+use 'metakirby5/codi.vim'
 
 
--- font icons
-use 'lambdalisue/nerdfont.vim'
-use 'lambdalisue/glyph-palette.vim'
-use 'ryanoasis/vim-devicons'
+  -- updater = function(x)
+  -- require log1 = require'log1'
+  -- log1.info('it trigerred yes it did')
+  -- log1.info(x) 
+  -- end }
 
-use 'tjdevries/colorbuddy.vim'
--- treesitter full lua awesome-neovim color schemes
+  use 'svermeulen/vimpeccable'
+
+  use 'bfredl/nvim-luadev'
+  use 'tjdevries/nlua.nvim'
+  -- use 'euclidianAce/BetterLua.vim'
+  -- use 'tjdevries/vlog.nvim'
+  -- use 'tjdevries/manillua.nvim'
+
+  -- use 'kyazdani42/nvim-tree.lua'
+  use '/home/f1/.config/nvim/plugins-manual/nvim-tree.lua'
+
+  use '/home/f1/.config/nvim/plugins-me/omnimenu.nvim'
+  -- lsp 
+  use 'neovim/nvim-lspconfig'
+
+  use {'nvim-lua/completion-nvim'}
+  use 'fhill2/ultipreview.nvim'
+
+  -- use 'Shougo/deoplete.nvim' --  { 'do': ':UpdateRemotePlugins' }
+
+  -- use 'C:/Users/F1/AppData/Local/nvim/plugins-me/ultisnippets-preview-nvim'
+  -- use 'C:/Users/F1/AppData/Local/nvim/plugins-manual/completion-nvim'
+  use 'tjdevries/lsp_extensions.nvim'
+  use 'ncm2/float-preview.nvim'
+  use 'glepnir/lspsaga.nvim'
+  use 'kosayoda/nvim-lightbulb'
+  use 'nvim-lua/lsp-status.nvim'
+
+  use {'iamcco/markdown-preview.nvim'} -- , run = 'cd app & npm install' }
+
+  -- lsp snippets
+  use 'honza/vim-snippets'
+  use 'SirVer/ultisnips'
+
+  -- treesitter
+  -- use 'christianchiarulli/nvcode-color-schemes.vim'
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use 'nvim-treesitter/playground'
+
+  -- treesitter all extensions - trying out
+  use 'nvim-treesitter/nvim-treesitter-refactor'
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'romgrk/nvim-treesitter-context'
+  use 'p00f/nvim-ts-rainbow'
+  use 'stsewd/sphinx.nvim'
+  use 'theHamsta/nvim-dap-virtual-text'
+
+  use 'hkupty/iron.nvim'
+  -- other 
+  -- use 'equalsraf/neovim-gui-shim'
+
+  -- viml
+  -- use '907th/vim-auto-save'
+
+  -- use {
+  --   'lambdalisue/fern.vim',
+  --     requires = {'lambdalisue/fern-renderer-nerdfont.vim', opt = true}
+  -- }
 
 
+use 'liuchengxu/vista.vim'
 
--- colorbuddy themes
-use { 'Th3Whit3Wolf/onebuddy', opt = false}
-use {'Th3Whit3Wolf/spacebuddy', opt = false}
-use { 'ishan9299/modus-theme-vim', opt = false}
--- https://github.com/tjdevries/gruvbuddy.nvim
+  use 'junegunn/fzf.vim'
+  use 'junegunn/fzf'
+  use 'mhinz/vim-startify'
 
--- awesome neovim themes
--- 
-use 'Th3Whit3Wolf/one-nvim'
-use { 'kyazdani42/blue-moon', opt = false}
-use { 'glepnir/zephyr-nvim', opt = false}
-use { 'rockerBOO/boo-colorscheme-nvim', opt = false}
+  -- font icons
+  use 'lambdalisue/nerdfont.vim'
+  use 'lambdalisue/glyph-palette.vim'
+  use 'ryanoasis/vim-devicons'
 
+  use {'kyazdani42/nvim-web-devicons', commit = 'aaffb87', opt = true}
 
-use { 'theniceboy/nvim-deus', opt = false}
-use { 'bkegley/gloombuddy', opt = false}
-use { 'kyazdani42/blue-moon', opt = false}
+  use 'tjdevries/colorbuddy.vim'
+  -- treesitter full lua awesome-neovim color schemes
 
+  -- colorbuddy themes
+  use 'Th3Whit3Wolf/onebuddy'
+  use 'Th3Whit3Wolf/spacebuddy'
+  use 'ishan9299/modus-theme-vim'
+  use 'tjdevries/gruvbuddy.nvim'
 
--- coc 
--- use 'neoclide/coc.nvim', {'branch': 'release'}
--- use 'rafcamlet/coc-nvim-lua'
+  -- awesome neovim themes
+  -- 
+  -- use 'Th3Whit3Wolf/one-nvim' -- DOESNT support treesitter highlighting
+  use 'cooper-anderson/glowbeam.nvim'
+  use 'mhartington/oceanic-next'
+  use 'kyazdani42/blue-moon'
+  use 'glepnir/zephyr-nvim'
+  use 'rockerBOO/boo-colorscheme-nvim'
+  use 'theniceboy/nvim-deus'
+  use 'bkegley/gloombuddy'
 
--- leave out replaced plugins
--- use 'liuchengxu/vim-which-key'
--- use 'vim-airline/vim-airline'
--- use 'vim-airline/vim-airline-themes'
--- use 'puremourning/vimspector'
--- use 'mfussenegger/nvim-dap'
--- use 'theHamsta/nvim-dap-virtual-text'
-use 'tpope/vim-scriptease'
--- use 'vim-scripts/genutils'
--- use 'albfan/vim-breakpts'
--- use 'sbdchd/neoformat'
--- use 'voldikss/vim-floaterm'
--- use 'preservim/nerdcommenter'
--- use 'airblade/vim-rooter'
--- use 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+  use 'lambdalisue/vim-gita'
 
--- leave out replaced plugins lsp
--- use 'lighttiger2505/deoplete-vim-lsp'
--- use 'Shougo/deoplete.nvim', { 'do': ':UpdateRemoteuseins' }
--- use 'thomasfaingnaert/vim-lsp-snippets'
--- use 'thomasfaingnaert/vim-lsp-ultisnips'
+  -- coc 
+  -- use { 'neoclide/coc.nvim', opt = true }
+  -- use 'rafcamlet/coc-nvim-lua'
 
+  -- leave out replaced plugins
+  -- use 'liuchengxu/vim-which-key'
+  -- use 'vim-airline/vim-airline'
+  -- use 'vim-airline/vim-airline-themes'
+  -- use 'puremourning/vimspector'
+  -- use 'mfussenegger/nvim-dap'
+  -- use 'theHamsta/nvim-dap-virtual-text'
+  use 'tpope/vim-scriptease'
+  -- use 'vim-scripts/genutils'
+  -- use 'albfan/vim-breakpts'
+  -- use 'sbdchd/neoformat'
+  -- use 'voldikss/vim-floaterm'
+  -- use 'preservim/nerdcommenter'
+  -- use 'airblade/vim-rooter'
+  -- use 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+
+  -- leave out replaced plugins lsp
+  -- use 'lighttiger2505/deoplete-vim-lsp'
+  -- use 'Shougo/deoplete.nvim', { 'do': ':UpdateRemoteuseins' }
+  -- use 'thomasfaingnaert/vim-lsp-snippets'
+  -- use 'thomasfaingnaert/vim-lsp-ultisnips'
+  --
+  use 'fhill2/testrepo'
 
 end
 

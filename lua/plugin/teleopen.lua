@@ -1,7 +1,16 @@
 function teleopen(prompt_bufnr, command)
+    
+    local a = vim.api
     local command = "edit"
+    local log3 = require'log3'
+    local actions = require('telescope/actions')
     local entry = actions.get_selected_entry(prompt_bufnr)
-  
+    local path = require('telescope.path')
+    local state = require('telescope.state')
+
+
+    print('IT GOT HERE TRIG')
+   log3.info(entry)
     if not entry then
       print("[telescope] Nothing currently selected")
       return
@@ -65,7 +74,7 @@ function teleopen(prompt_bufnr, command)
         if row and col then
           local ok, err_msg = pcall(a.nvim_win_set_cursor, 0, {row, col})
           if not ok then
-            log.debug("Failed to move to cursor:", err_msg, row, col)
+            log3.debug("Failed to move to cursor:", err_msg, row, col)
           end
         end
       end

@@ -1,4 +1,4 @@
-snippet asdlolomat "Description" b
+snippet asd1 "Description" b
 local snippet = {}
         for i,v in ipairs(data) do
               if i > linenr then
@@ -6,6 +6,7 @@ local snippet = {}
                   table.insert(snippet, v)
                 elseif v == 'endsnippet' then
                   --table.insert(snippet, v)
+                  ${1:asd}
                   break  
                 end
               end
@@ -15,14 +16,15 @@ endsnippet
 
 
 
-
-snippet lolzorz2 "Description" b
-ions.close(prompt_bufnr)
+snippet lolzorz2 "Description" b00
 endsnippet
 
 
 
 
-snippet lolzorz2 "Description" b
-ions.close(prompt_bufnr)
+
+
+
+snippet mysnip "asddesc" b
+if $1 then $2
 endsnippet
