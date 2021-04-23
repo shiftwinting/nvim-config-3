@@ -41,6 +41,29 @@ vim.cmd([[hi StatusLine guibg=]] .. colors.section_bg)
 --     highlight = { colors.cyan, colors.section_bg }
 --   },
 -- }
+
+
+local function luapad_eval_check(current_winnr, current_buffnr)
+ if current_winnr == fstate.btmwindow.luapad.winnr then
+    if fstate.luapad.btmwindow_eval_on_change == true then
+          return 'auto-ON'
+          elseif fstate.luapad.btmwindow_eval_on_change == false then
+            return 'auto-OFF'
+          end
+    
+      elseif current_winnr ~= fstate.btmwindow.luapad.winnr then
+    if fstate.luapad.editor_eval_on_change == true then
+
+          return 'auto-ON'
+          elseif fstate.luapad.editor_eval_on_change == false then
+            return 'auto-OFF'
+          end
+      end 
+end
+
+
+
+
 gls.left[1] = {
   ViMode = {
     provider = function()
@@ -87,23 +110,27 @@ gls.left[7] = {
 gls.left[8] = {
     Luapadauto = {
     provider = function()
-      --if pcall(require'luapad/statusline'.status) ~= true then return end
-        local luapad_status = require'luapad/statusline'.status()
-            if luapad_status == 'ok' then
-             --   log1.info('gets here')
-                if vim.g.eval_on_change == true then
-                --     l('auto turned on')
-                    return 'auto-ON' 
-                else
-              --  l('auto off')
-                return 'auto-OFF'
-                end
-            else
-            -- l('nothing')
-                 return ''
-             end
-          --  log1.info(luapad_status)
-        end, -- end of provider
+      local current_winnr = vim.api.nvim_get_current_win()
+     local current_bufnr = vim.api.nvim_get_current_buf()
+    local all_luapad_bufnr = require'plugin/luapad'.all_luapad_bufnr()
+
+--lo('luapad_eval_check is:')
+--lo(luapad_eval_check())
+
+if vim.tbl_isempty(all_luapad_bufnr) == true then 
+--lo('tbl is empty')
+  return '' 
+end
+-- lo(vim.tbl_contains(all_luapad_bufnr, current_bufnr))
+
+    if vim.tbl_contains(all_luapad_bufnr, current_bufnr) == true then
+    return luapad_eval_check(current_winnr)
+  --  return ''
+                  elseif vim.tbl_contains(all_luapad_bufnr, current_bufnr) ~= true then
+        return ''
+        end
+
+     end, -- end of provider
    condition = function() 
       
         if pcall(require'luapad/statusline'.status) == true then return true else return false end

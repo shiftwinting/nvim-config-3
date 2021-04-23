@@ -1,7 +1,7 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local packer_custom_updater = require 'plugin/packer_custom_updater'
-local log1 = require 'log1'
+local log = require'log1'
 
 -- orig: local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
@@ -42,7 +42,8 @@ local function init() -- only 1 function below here
   use_rocks 'luarepl'
   -- use_rocks {'lua-format'}
 
-  use 'lukas-reineke/format.nvim'
+ -- use 'lukas-reineke/format.nvim'
+  use '/home/f1/.config/nvim/plugins-manual/format.nvim'
   -- didnt use this, error on format
   -- use 'mhartington/formatter.nvim'
 
@@ -74,27 +75,71 @@ local function init() -- only 1 function below here
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
 
-  use 'nvim-telescope/telescope.nvim'
-  -- use {
+  use { 'nvim-telescope/telescope.nvim', opt = true }
+--        opt = true,
+--         config = function()    
+--           require('telescope').setup{
+--     defaults = {
+--      results_width = 0.1,
+--      layout_strategy = 'horizontal',
+--    --  results_height = 44,
+--    --  height = 44
+--  },
+--  extensions = {
+--     frecency = {
+--       show_scores = true,
+--       show_unindexed = true,
+--       ignore_patterns = {"*.git/*", "*/tmp/*"},
+--       workspaces = {
+--         ["conf"]    = "/home/f1/.config",
+--         ["data"]    = "/home/f1/.local/nvim"
+--       }
+--     },
+-- fzy_native = {
+--             override_generic_sorter = true,
+--             override_file_sorter = true,
+--         }
+--   },
+--  }
+--         end
+--       }
+
+
+      -- use {
   -- 'nvim-telescope/telescope.nvim',
   --     depends = { 'kyazdani42/nvim-web-devicons', opt = true }
+
   -- }
 
   use {'prettier/vim-prettier', run = 'npm install'}
 
   use 'nvim-telescope/telescope-packer.nvim'
   use 'nvim-telescope/telescope-snippets.nvim'
-  use 'fhill2/telescope-ultisnips.nvim'
+   -- opt = true,
+
+    --  config = function() require'telescope'.load_extension('snippets') end
+  --  }
+ -- use { "nvim-telescope/telescope-frecency.nvim", opt = true }
+
+  use { 'fhill2/telescope-ultisnips.nvim', 
+  opt = true, 
+   config = function() 
+      require'telescope'.load_extension('ultisnips') end
+--setup = function() require'telescope'.load_extension('Ultisnips') end
+ }
+
+
+
 
   use 'tami5/sql.nvim'
   use 'nvim-telescope/telescope-cheat.nvim'
 
-  -- use 'nvim-telescope/telescope-frecency'
+  use { 'nvim-telescope/telescope-frecency',
+   opt = false,
+   config = function() require"telescope".load_extension("frecency") end
+ }
+vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 
-  use {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function() require"telescope".load_extension("frecency") end
-  }
 
   use 'nvim-telescope/telescope-fzy-native.nvim'
 
@@ -164,6 +209,15 @@ use 'metakirby5/codi.vim'
   use 'theHamsta/nvim-dap-virtual-text'
 
   use 'hkupty/iron.nvim'
+
+
+  use '/home/f1/.config/nvim/plugins-me/livetablelogger.nvim'
+
+
+  -- use '/home/f1/.config/nvim/plugins-me/floating.nvim'
+  use 'fhill2/floating.nvim'
+  use 'voldikss/vim-floaterm'
+
   -- other 
   -- use 'equalsraf/neovim-gui-shim'
 

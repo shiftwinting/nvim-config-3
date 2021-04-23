@@ -21,7 +21,7 @@ vim.defer_fn(function()
 --lo(filetype)
  
     if filetype == 'NvimTree' then 
-      lo('this ran')
+   --   lo('this ran')
         nvimtree_exists = true
         end
     end

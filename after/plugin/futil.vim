@@ -90,6 +90,14 @@ endfunction
 
 
 
+function! Fwinsaveview()
+let b:winview = winsaveview()
+endfunction
+
+function! Fwinrestview()
+call winrestview(b:winview)
+endfunction
+
 " function! Log(message)
 " g:logoutput = message
 " lua lo(vim.g.logoutput)

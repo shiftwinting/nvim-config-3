@@ -54,45 +54,123 @@ local actions = require('telescope.actions')
 -- }
 
 
- require('telescope').setup{
-    defaults = {
-     results_width = 0.1
- },
- extensions = {
-    frecency = {
-      show_scores = true,
-      show_unindexed = true,
-      ignore_patterns = {"*.git/*", "*/tmp/*"},
-      workspaces = {
-        ["conf"]    = "/home/f1/.config",
-        ["data"]    = "/home/f1/.local/nvim"
-      }
-    }
-  },
- }
+--  require('telescope').setup{
+--     defaults = {
+--      results_width = 0.1,
+--      layout_strategy = 'horizontal',
+--    --  results_height = 44,
+--    --  height = 44
+--  },
+--  extensions = {
+--     frecency = {
+--       show_scores = true,
+--       show_unindexed = true,
+--       ignore_patterns = {"*.git/*", "*/tmp/*"},
+--       workspaces = {
+--         ["conf"]    = "/home/f1/.config",
+--         ["data"]    = "/home/f1/.local/nvim"
+--       }
+--     },
+-- fzy_native = {
+--             override_generic_sorter = true,
+--             override_file_sorter = true,
+--         }
+--   },
+--  }
 
 
 
 -- Built-in actions
-local transform_mod = require('telescope.actions.mt').transform_mod
+-- local transform_mod = require('telescope.actions.mt').transform_mod
 
--- or create your custom action
-local my_cool_custom_action = transform_mod({
-  x = function()
-    print("This function ran after another action. Prompt_bufnr: " .. prompt_bufnr)
-    -- Enter your function logic here. You can take inspiration from lua/telescope/actions.lua
-  end,
-})
-
-
+-- -- or create your custom action
+-- local my_cool_custom_action = transform_mod({
+--   x = function()
+--     print("This function ran after another action. Prompt_bufnr: " .. prompt_bufnr)
+--     -- Enter your function logic here. You can take inspiration from lua/telescope/actions.lua
+--   end,
+-- })
 
 
 
-require('telescope').load_extension('snippets')
+
+require('telescope').load_extension('fzy_native')
+--require('telescope').load_extension('snippets')
 require'telescope'.load_extension("cheat")
-require('telescope').load_extension('ultisnips')
+--require('telescope').load_extension('ultisnips')
+require('telescope').load_extension('livetablelogger')
+--require('telescope').load_extension('frecency')
 
 
 
+local M = {}
+
+function M.modify_window(win_opts, window)
+ -- l('========= START MODIFY ========')
+ -- local line_count = vim.o.lines - vim.o.cmdheight
+ --  if vim.o.laststatus ~= 0 then
+ --    line_count = line_count - 1
+ --  end
+
+local x = 7
+local x = vim.o.lines - x
+local height = 40
+
+  if window == 'Results' then
+  --  win_opts = {}
+ --   win_opts['relative'] = 'editor'
+ win_opts['height'] = height
+ win_opts['row'] = x
+win_opts['anchor'] = 'SW'
+--win_opts['width'] = 50
+--win_opts['col'] = 20
+--win_opts['bufpos'] = {100,20}
+elseif window == 'Preview' then
+ -- win_opts['height'] = math.ceil(vim.o.lines / 3 - 5)
+ -- win_opts['row'] = math.ceil(vim.o.lines - vim.o.lines / 3)
+ win_opts['height'] = height + 3
+ win_opts['row'] = x + 3
+ win_opts['anchor'] = 'SW'
+else
+win_opts['row'] = x + 3
+win_opts['height'] = 1
+ win_opts['anchor'] = 'SW'
+
+end
 
 
+
+--l(window)
+--l(win_opts)
+
+
+
+return win_opts
+
+end
+
+-- function M.onTelescopePrompt()
+-- lo('telescope trig')
+-- lo(vim.api.nvim_list_wins())
+--    for _, winnr in pairs(vim.api.nvim_list_wins()) do
+--       local bufnr = vim.fn.winbufnr(winnr)
+--       local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+-- lo(filetype)
+-- if filetype == 'TelescopePrompt' then
+--   lo('trigerred')
+--   vim.api.nvim_win_set_config(winnr, {
+
+-- --relative='editor', width = 12, height = 3, row = 1, col = 1
+--  relative='win', width=12, height=3, bufpos={100,10}
+
+--   })
+
+
+
+-- end
+
+--     end
+
+-- end
+
+return M

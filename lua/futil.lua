@@ -1,6 +1,7 @@
 local log1 = require('log1')
 local M = {}
 
+local utils = require'futil/utils'
 
 function M._get_visual_selection_range()
   local _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
@@ -14,9 +15,12 @@ end
 
 
 
+
+
 -- THIS FUNCTION KEYMAPPED TO ALT-I
 function M.test()
-print(vim.api.nvim_get_current_win())
+--lo(repeating)
+--vim.api.nvim_buf_set_lines(50, 0, -1, true, utils.repeated_table(200, 'a'))
 end
 
 

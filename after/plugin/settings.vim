@@ -31,14 +31,16 @@ com -nargs=1 -complete=command Redir
 "
 "
 
+nnoremap <silent> GG :echom screencol()<CR>
+
 
 " turn on/off logging for format.nvim lukas-reineke
-let g:format_debug = v:false
+let g:format_debug = v:true
 " lukas reineke format.nvim format on save
-augroup Format
-    autocmd!
-    autocmd BufWritePost * FormatWrite
-augroup END
+" augroup Format
+"     autocmd!
+"     autocmd BufWritePost * FormatWrite
+" augroup END
 
 
 
@@ -78,7 +80,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " ALL sessionoptions available below
 set sessionoptions=
-set sessionoptions+=globals " YOU CANT EXPORT TABLES / DICTS. only strings or numbers.
+set sessionoptions-=globals " YOU CANT EXPORT TABLES / DICTS. only strings or numbers. also leave off if i can otherwise it will copy globals that i change 
 set sessionoptions+=blank
 set sessionoptions+=buffers
 set sessionoptions+=curdir
