@@ -25,6 +25,11 @@ local function init() -- only 1 function below here
   local use = packer.use
   local use_rocks = packer.use_rocks
   packer.reset()
+ -- do not uncomment
+   use { '/home/f1/.config/nvim/plugins-me/floating.nvim' }
+ -- use { 'fhill2/floating.nvim', lock = true } --  run = 'git fetch --unshallow' }
+
+
 
   -- Packer
   -- how to put useins into separate folders:
@@ -157,8 +162,6 @@ use 'metakirby5/codi.vim'
 
   -- updater = function(x)
   -- require log1 = require'log1'
-  -- log1.info('it trigerred yes it did')
-  -- log1.info(x) 
   -- end }
 
   use 'svermeulen/vimpeccable'
@@ -214,9 +217,7 @@ use 'metakirby5/codi.vim'
   use '/home/f1/.config/nvim/plugins-me/livetablelogger.nvim'
 
 
-  -- use '/home/f1/.config/nvim/plugins-me/floating.nvim'
-  use 'fhill2/floating.nvim'
-  use 'voldikss/vim-floaterm'
+   use 'voldikss/vim-floaterm'
 
   -- other 
   -- use 'equalsraf/neovim-gui-shim'

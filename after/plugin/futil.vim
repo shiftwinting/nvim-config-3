@@ -98,6 +98,32 @@ function! Fwinrestview()
 call winrestview(b:winview)
 endfunction
 
+
+
+function! Fopen_popup(bufnr) abort
+  let options = {
+        \ 'pos': 'NW',
+        \ 'line': 20,
+        \ 'col': 20,
+        \ 'maxwidth': 20,
+        \ 'minwidth': 20,
+        \ 'maxheight': 20,
+        \ 'minheight': 15,
+        \ 'title': 'asdasd',
+        \ 'border': [1, 1, 1, 1],
+        \ 'borderhighlight': ['FloatermBorder'],
+        \ 'padding': [0,1,0,1],
+        \ 'highlight': 'Floaterm',
+        \ 'zindex': len(floaterm#buflist#gather()) + 1
+        \ }
+  let winid = popup_create(a:bufnr, options)
+ " call s:init_win(winid, v:false)
+" call floaterm#config#set(a:bufnr, 'winid', winid)
+  return winid
+endfunction
+
+
+
 " function! Log(message)
 " g:logoutput = message
 " lua lo(vim.g.logoutput)

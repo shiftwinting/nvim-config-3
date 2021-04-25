@@ -1,4 +1,4 @@
-require'floating'.config {
+require'floating'.setup {
 defaults = {
 -- nvim_open_win() standard params
 width = 0.9, -- 0-1 = 0%-100%
@@ -9,7 +9,7 @@ style = 'minimal', -- 'minimal' only
 -- single & dual
 x = 0, -- left -, right +
 y = 0, -- down -, up +
---pin = 'bot', -- top/topright/right/botright/bot/botleft/left/topleft
+pin = 'bot', -- top/topright/right/botright/bot/botleft/left/topleft
 winblend = 15,
 margin = {1,1,1,1},
 enter = false, -- true/false or 'one'/'two'
@@ -52,3 +52,5 @@ user_actions = {
 -- add your own custom actions here
 }
 }
+
+
