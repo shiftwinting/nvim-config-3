@@ -36,6 +36,10 @@ local function init() -- only 1 function below here
   -- use {'dracula/vim', as = 'dracula/draculaasd2'}
   use {'wbthomason/packer.nvim', opt = true}
 
+use 'skywind3000/asynctasks.vim' 
+use 'skywind3000/asyncrun.vim'
+use 'GustavoKatel/telescope-asynctasks.nvim'
+
   -- tmux stuff
 
   -- use 'roxma/vim-tmux-clipboard' -- needed to make clipboard work
@@ -216,6 +220,8 @@ use 'metakirby5/codi.vim'
 
   use '/home/f1/.config/nvim/plugins-me/livetablelogger.nvim'
 
+  use '/home/f1/.config/nvim/plugins-me/codelibrary.nvim'
+
 
    use 'voldikss/vim-floaterm'
 
@@ -292,6 +298,8 @@ use 'liuchengxu/vista.vim'
   -- use 'thomasfaingnaert/vim-lsp-snippets'
   -- use 'thomasfaingnaert/vim-lsp-ultisnips'
   --
+
+  use 'ms-jpq/neovim-async-tutorial'
   use 'fhill2/testrepo'
 
 end

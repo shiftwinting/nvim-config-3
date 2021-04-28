@@ -124,9 +124,5 @@ endfunction
 
 
 
-" function! Log(message)
-" g:logoutput = message
-" lua lo(vim.g.logoutput)
-" endfunction
 
 

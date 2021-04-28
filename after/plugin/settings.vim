@@ -56,8 +56,7 @@ set nobackup
 if has('nvim')
     augroup terminal_setup | au!
         autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
-        " more stuff
-    augroup end
+         augroup end
 endif
 
 " turn off auto commenting for every buffer

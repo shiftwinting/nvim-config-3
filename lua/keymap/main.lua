@@ -28,6 +28,11 @@ api.nvim_set_keymap('', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<
 api.nvim_set_keymap('!', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<cr>]], {})
 
 
+api.nvim_set_keymap('', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
+api.nvim_set_keymap('!', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
+
+
+
 -- for map, leave 1st argument as blank
 -- for map, 1st argument = '!'
 -- 2nd 3rd argument are hotkey action

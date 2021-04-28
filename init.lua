@@ -43,6 +43,7 @@ execute 'packadd galaxyline.nvim'
 require('plenary.reload').reload_module("plugin/galaxyline")
 require('plugin/galaxyline')
 
+
 -- END DONT turn these ones off when debugging
 
 -- always load first
@@ -64,7 +65,9 @@ execute 'packadd nvim-bufferline.lua'
 --require('plenary.reload').reload_module("plugin/bufferline") -- reload is broken for bufferline
 require('plugin/bufferline')
 
-
+execute 'packadd floating.nvim'
+require('plenary.reload').reload_module("plugin/floating")
+require('plugin/floating')
 
 execute 'packadd vim-lookup'
 
@@ -163,13 +166,16 @@ require('plugin/nvim-tree')
 execute 'packadd vim-floaterm'
 
 
+execute 'packadd asynctasks.vim'
+execute 'packadd asyncrun.vim'
+execute 'packadd telescope-asynctasks.nvim'
+
+execute 'packadd codelibrary.nvim'
 
 
 
 lo('====== NVIM STARTUP =====')
-execute 'packadd floating.nvim'
-require('plenary.reload').reload_module("plugin/floating")
-require('plugin/floating')
+
 
 
 execute 'packadd vista.vim'
@@ -198,6 +204,8 @@ require('keymap/vista')
 
 execute 'packadd testrepo'
 
+
+execute 'packadd neovim-async-tutorial'
 
 
 

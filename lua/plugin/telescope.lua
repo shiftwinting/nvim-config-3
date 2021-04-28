@@ -99,6 +99,8 @@ require('telescope').load_extension('fzy_native')
 require'telescope'.load_extension("cheat")
 --require('telescope').load_extension('ultisnips')
 require('telescope').load_extension('livetablelogger')
+require('telescope').load_extension('floating')
+
 --require('telescope').load_extension('frecency')
 
 
