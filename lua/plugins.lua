@@ -1,10 +1,13 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
-local packer_custom_updater = require 'plugin/packer_custom_updater'
-local log = require'log1'
+print('PLUGINS LOADED')
+--local packer_custom_updater = require 'plugin/packer_custom_updater'
+--local log = require'log1'
 
 -- orig: local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local plugins_manual = '/home/f1/code/nvim-configs//nvim-main/plugins-manual'
+local plugins_me = '/home/f1/code/nvim-configs/nvim-main/plugins-me'
 
 -- install path for packer
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -14,6 +17,8 @@ end
 
 local packer = nil
 local function init() -- only 1 function below here
+
+
 
   if packer == nil then
     packer = require('packer')
@@ -26,9 +31,9 @@ local function init() -- only 1 function below here
   local use_rocks = packer.use_rocks
   packer.reset()
  -- do not uncomment
-   use { '/home/f1/.config/nvim/plugins-me/floating.nvim' }
+   use { plugins_me .. '/floating.nvim' }
  -- use { 'fhill2/floating.nvim', lock = true } --  run = 'git fetch --unshallow' }
-
+  use { plugins_me .. '/bash-zsh-repl.nvim'}
 
 
   -- Packer
@@ -47,14 +52,15 @@ use 'GustavoKatel/telescope-asynctasks.nvim'
   -- rocks
 
   use_rocks {'luaformatter', server = 'https://luarocks.org/dev'}
-  use_rocks 'luacheck'
+  use_rocks 'luacheck' execute 'packadd packer.nvim'
+
   use_rocks 'luarepl'
   -- use_rocks {'lua-format'}
 
  -- use 'lukas-reineke/format.nvim'
-  use '/home/f1/.config/nvim/plugins-manual/format.nvim'
+  --use '/home/f1/.config/nvim/plugins-manual/format.nvim'
   -- didnt use this, error on format
-  -- use 'mhartington/formatter.nvim'
+  use 'mhartington/formatter.nvim'
 
   -- use 'nvim-telescope/telescope-z.nvim'
   -- end rocks
@@ -85,6 +91,8 @@ use 'GustavoKatel/telescope-asynctasks.nvim'
   use 'nvim-lua/plenary.nvim'
 
   use { 'nvim-telescope/telescope.nvim', opt = true }
+
+use 'rktjmp/fwatch.nvim'
 --        opt = true,
 --         config = function()    
 --           require('telescope').setup{
@@ -143,16 +151,15 @@ use 'GustavoKatel/telescope-asynctasks.nvim'
   use 'tami5/sql.nvim'
   use 'nvim-telescope/telescope-cheat.nvim'
 
-  use { 'nvim-telescope/telescope-frecency',
-   opt = false,
-   config = function() require"telescope".load_extension("frecency") end
- }
-vim.api.nvim_command([[packadd telescope-frecency.nvim]])
-
+ --  use { 'nvim-telescope/telescope-frecency',
+ --   opt = false,
+ --   config = function() require"telescope".load_extension("frecency") end
+ -- }
+use {'nvim-telescope/telescope-frecency.nvim'}
 
   use 'nvim-telescope/telescope-fzy-native.nvim'
 
-  use '/home/f1/.config/nvim/plugins-me/telefrecency.nvim'
+  use { plugins_me .. '/telefrecency.nvim' }
 
   use 'norcalli/snippets.nvim'
   -- lua 
@@ -177,9 +184,9 @@ use 'metakirby5/codi.vim'
   -- use 'tjdevries/manillua.nvim'
 
   -- use 'kyazdani42/nvim-tree.lua'
-  use '/home/f1/.config/nvim/plugins-manual/nvim-tree.lua'
+  use { plugins_manual .. '/nvim-tree.lua' }
 
-  use '/home/f1/.config/nvim/plugins-me/omnimenu.nvim'
+  use { plugins_me .. '/omnimenu.nvim' }
   -- lsp 
   use 'neovim/nvim-lspconfig'
 
@@ -218,9 +225,9 @@ use 'metakirby5/codi.vim'
   use 'hkupty/iron.nvim'
 
 
-  use '/home/f1/.config/nvim/plugins-me/livetablelogger.nvim'
+  use { plugins_me .. '/livetablelogger.nvim' }
 
-  use '/home/f1/.config/nvim/plugins-me/codelibrary.nvim'
+  use { plugins_me ..  '/codelibrary.nvim' }
 
 
    use 'voldikss/vim-floaterm'

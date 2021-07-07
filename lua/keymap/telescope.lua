@@ -6,6 +6,9 @@ api.nvim_set_keymap('!', '<A-a>t', [[<cmd>lua require('telescope').extensions.pa
 
 api.nvim_set_keymap('', '<A-a>f', [[<cmd>lua require'omnimenu'.show_telescope()<cr>]], {})
 api.nvim_set_keymap('!', '<A-a>f', [[<cmd>lua require'omnimenu'.show_telescope()<<cr>]], {})
+-- omnimenu save visual selection
+-- api.nvim_set_keymap('', '<A-,>m', [[<cmd>lua require'omnimenu'.save_to_config()<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-,>m', [[<cmd>lua require'omnimenu'.save_to_config()<cr>]], {})
 
 
 
@@ -30,8 +33,8 @@ api.nvim_set_keymap('!', '<A-a>1', [[<cmd>lua require('telescope.builtin').buffe
 api.nvim_set_keymap('', '<A-a>a', [[<cmd>lua require'plugin/teleconfig'.myFunc("]] .. vim.fn.getcwd() .. [[", "find_files")<cr>]], {})
 api.nvim_set_keymap('!', '<A-a>a', [[<cmd>lua require'plugin/teleconfig'.myFunc("]] .. vim.fn.getcwd() .. [[", "find_files")<cr>]], {})
 
-api.nvim_set_keymap('', '<A-a>c', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/code-library/AA", "find_files")<cr>]], {})
-api.nvim_set_keymap('!', '<A-a>c', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/code-library/AA", "find_files")<cr>]], {})
+api.nvim_set_keymap('', '<A-a>c', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/code-library/cl", "find_files")<cr>]], {})
+api.nvim_set_keymap('!', '<A-a>c', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/code-library/cl", "find_files")<cr>]], {})
 
 api.nvim_set_keymap('', '<A-a>d', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/.dotfiles", "find_files")<cr>]], {})
 api.nvim_set_keymap('!', '<A-a>d', [[<cmd>lua require'plugin/teleconfig'.myFunc("~/.dotfiles", "find_files")<cr>]], {})
@@ -74,6 +77,8 @@ api.nvim_set_keymap('!', '<A-d>a', [[<cmd>lua require'plugin/teleconfig'.myFunc(
 -- api.nvim_set_keymap('!', '<A-d>d', [[<cmd>lua require'plugin/teleconfig'.myFunc("", "live_grep")<cr>]], {})
 
 
+api.nvim_set_keymap('', '<A-z>z', [[<cmd>lua require'futil/send_to_old'.send_visual()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>z', [[<cmd>lua require'futil/send_to_old'.send_visual()<cr>]], {})
 
 
 
@@ -102,9 +107,6 @@ api.nvim_set_keymap('!', '<A-a>v', [[<cmd>lua require('telescope.builtin').comma
 api.nvim_set_keymap('', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
 api.nvim_set_keymap('!', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
 
--- omnimenu save visual selection
-api.nvim_set_keymap('', '<A-,>m', [[<cmd>lua require'omnimenu'.save_to_config()<cr>]], {})
-api.nvim_set_keymap('!', '<A-,>m', [[<cmd>lua require'omnimenu'.save_to_config()<cr>]], {})
 
 
 -- api.nvim_set_keymap('', '<A-a>', [[<cmd>lua require('telescope.builtin').tags()<cr>]], {})

@@ -91,7 +91,7 @@ function M.onVimEnter()
  -- lo(fstate)
 --  print(fstate.window)
 --vim.cmd([[e /home/f1/.config/nvim/lua/asd6.lua]])
-vim.cmd([[e /home/f1/.config/nvim/plugins-me/livetablelogger.nvim/lua/tests/window-config.lua]])
+--vim.cmd([[e /home/f1/.config/nvim/plugins-me/livetablelogger.nvim/lua/tests/window-config.lua]])
 
 if fstate.window.current_winnr == nil then fstate.window.current_winnr = 1000 end
 

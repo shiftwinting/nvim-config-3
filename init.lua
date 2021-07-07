@@ -2,8 +2,8 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 local api = vim.api
 
-local futil = require 'futil'
-local log1 = require 'log1'
+--local futil = require 'futil'
+--local log1 = require 'log1'
 
 require('plugins')
 -- START dont turn these ones off when debugging
@@ -57,6 +57,7 @@ execute 'packadd nvim-luapad'
 --require('plenary.reload').reload_module("plugin/luapad")
 --require('plugin/luapad')
 execute 'packadd codi.vim'
+execute 'packadd iron.nvim'
 
 execute 'packadd snippets.nvim'
 execute 'packadd telescope-snippets.nvim'
@@ -66,12 +67,14 @@ execute 'packadd nvim-bufferline.lua'
 require('plugin/bufferline')
 
 execute 'packadd floating.nvim'
+execute 'packadd bash-zsh-repl.nvim'
+
 require('plenary.reload').reload_module("plugin/floating")
 require('plugin/floating')
 
 execute 'packadd vim-lookup'
 
-execute 'packadd format.nvim'
+execute 'packadd formatter.nvim'
 require('plenary.reload').reload_module("plugin/formatter")
 require('plugin/formatter')
 
@@ -159,8 +162,11 @@ execute 'packadd gloombuddy'
 vim.cmd([[colorscheme onebuddy]])
 
 execute 'packadd omnimenu.nvim'
+require('plenary.reload').reload_module("plugin/omnimenu")
+require('plugin/omnimenu')
 
 execute 'packadd nvim-tree.lua'
+require('plenary.reload').reload_module("plugin/nvim-tree")
 require('plugin/nvim-tree')
 
 execute 'packadd vim-floaterm'
@@ -172,7 +178,7 @@ execute 'packadd telescope-asynctasks.nvim'
 
 execute 'packadd codelibrary.nvim'
 
-
+execute 'packadd fwatch.nvim'
 
 lo('====== NVIM STARTUP =====')
 
@@ -364,7 +370,7 @@ vim.api.nvim_command("autocmd WinNew,WinClosed * lua require'futil/window'.onWin
 -- managing luapad between btmwindow & other open lua buffers
 vim.api.nvim_command("autocmd WinEnter * lua require'plugin/luapad'.onWinEnter()")
 
-vim.cmd("autocmd ColorScheme * lua require'futil/colors'.applyCustomColors()")
+--vim.cmd("autocmd ColorScheme * lua require'futil/colors'.applyCustomColors()")
 
 api.nvim_set_current_dir(vim.fn.stdpath('config'))
 
@@ -396,7 +402,17 @@ vim.cmd([[setlocal nosmartindent]])
 
 
 -- old
+if vim.v.servername == '/tmp/nvim4' then
+require'omnimenu'.show_telescope()
+-- vim.cmd([[autocmd VimEnter * lua (function() require'omnimenu'.show_telescope()
+--  end)()]])
+end
 
+local servername = vim.v.servername
+--if servername:find('/tmp/nvim%d$') ~= nil then
+local cmd = string.format([[autocmd VimLeavePre * lua require'futil/utils'.remove_socket('%s')]], servername)
+vim.cmd(cmd)
+--end
 
 
 -- old session autocmds

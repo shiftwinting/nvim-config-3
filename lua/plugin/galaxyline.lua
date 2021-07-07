@@ -1,5 +1,5 @@
 local gl = require('galaxyline')
-local utils = require('utils')
+local utils = require('futil/utils')
 
 local gls = gl.section
 

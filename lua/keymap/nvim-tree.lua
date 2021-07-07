@@ -4,8 +4,8 @@ api.nvim_set_keymap('', '<A-f>f', [[<cmd>lua require'nvim-tree'.on_keypress('cdt
 api.nvim_set_keymap('!', '<A-f>f', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', ']] .. vim.fn.getcwd() .. [[')<cr>]], {})
 
 
-api.nvim_set_keymap('', '<a-f>c', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/code-library/AA')<cr>]], {})
-api.nvim_set_keymap('!', '<a-f>c', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/code-library/AA')<cr>]], {})
+api.nvim_set_keymap('', '<a-f>c', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/code-library')<cr>]], {})
+api.nvim_set_keymap('!', '<a-f>c', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/code-library')<cr>]], {})
 
 api.nvim_set_keymap('', '<a-f>d', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/.dotfiles')<cr>]], {})
 api.nvim_set_keymap('!', '<a-f>d', [[<cmd>lua require'nvim-tree'.on_keypress('cdtree', '/home/f1/.dotfiles')<cr>]], {})

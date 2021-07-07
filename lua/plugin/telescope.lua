@@ -54,29 +54,29 @@ local actions = require('telescope.actions')
 -- }
 
 
---  require('telescope').setup{
---     defaults = {
---      results_width = 0.1,
---      layout_strategy = 'horizontal',
---    --  results_height = 44,
---    --  height = 44
---  },
---  extensions = {
---     frecency = {
---       show_scores = true,
---       show_unindexed = true,
---       ignore_patterns = {"*.git/*", "*/tmp/*"},
---       workspaces = {
---         ["conf"]    = "/home/f1/.config",
---         ["data"]    = "/home/f1/.local/nvim"
---       }
---     },
--- fzy_native = {
---             override_generic_sorter = true,
---             override_file_sorter = true,
---         }
---   },
---  }
+ require('telescope').setup{
+    defaults = {
+     results_width = 0.1,
+     layout_strategy = 'horizontal',
+   --  results_height = 44,
+   --  height = 44
+ },
+ extensions = {
+    frecency = {
+      show_scores = true,
+      show_unindexed = true,
+      ignore_patterns = {"*.git/*", "*/tmp/*"},
+      workspaces = {
+        ["conf"]    = "/home/f1/.config",
+        ["data"]    = "/home/f1/.local/nvim"
+      }
+    },
+fzy_native = {
+            override_generic_sorter = true,
+            override_file_sorter = true,
+        }
+  },
+ }
 
 
 

@@ -4,7 +4,7 @@
 local function myFunc(inputdir, action)
   -- print(inputdir)
   local actions = require('telescope.actions')
-  local futil = require('futil')
+ -- local futil = require('futil')
   -- local teleopen = require('teleopen')
 
   -- to make open function work
@@ -243,7 +243,8 @@ local function myFunc(inputdir, action)
 
   local openInActiveWindow = function(prompt_bufnr)
     local entry = actions.get_selected_entry(prompt_bufnr)
-    --  lo(entry)
+    lo('active window trig')
+      lo(entry)
     vim.api.nvim_set_current_win(fstate.window.current_winnr)
     if entry.lnum ~= nil then
 

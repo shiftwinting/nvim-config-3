@@ -3,7 +3,7 @@ defaults = {
 -- nvim_open_win() standard params
 width = 0.9, -- 0-1 = 0%-100%
 height = 0.3, -- 0-1 = 0%-100%
-relative = 'win', -- 'editor'/'win' supported only
+relative = 'editor', -- 'editor'/'win' supported only
 style = 'minimal', -- 'minimal' only
 
 -- single & dual
@@ -12,7 +12,7 @@ y = 0, -- down -, up +
 pin = 'bot', -- top/topright/right/botright/bot/botleft/left/topleft
 winblend = 15,
 margin = {1,1,1,1},
-enter = false, -- true/false or 'one'/'two'
+enter = true, -- true/false or 'one'/'two'
 toggle = true, 
 
 -- single & dual border
@@ -46,11 +46,21 @@ two_margin = {1,1,1,1},
 },
 
 user_views = {
+my_view = { dual = true},
 -- add your own custom views here
 },
 user_actions = {
+fwatch_start = function(opts, custom_opts) 
+  lo('fstate start') 
+ -- lo(opts)
+ -- lo(custom_opts)
+end
 -- add your own custom actions here
-}
+},
+user_exits = {
+fwatch_exit = function(opts, custom_opts) lo('fwatch exit') end
+},
+
 }
 
 

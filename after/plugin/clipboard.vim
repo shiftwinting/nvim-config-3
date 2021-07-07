@@ -14,7 +14,7 @@
 
 
 
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
 "if system('uname -a | egrep [Mm]icrosoft') != ''
 " let g:lastyank = 'y'
 " if executable('win32yank.exe')

@@ -4,10 +4,26 @@
 "       \ },
 "       \}
 
-let g:codi#virtual_text = 1
+let g:codi#interpreters = {
+\ 'zsh': {
+\ 'bin': ['zsh'],
+\ 'prompt': '^\(>\|\.\.\.\+\) ',
+\ }
+\ }
 
 
-let g:codi#virtual_text_prefix = " > "
+
+
+
+"\ 'prompt': '^(archLinux%) ',
+
+" removes secondary window and prints the output as inline virtual text
+let g:codi#virtual_text = 0
+
+let g:codi#raw=1
+
+
+let g:codi#virtual_text_prefix = " >>>> "
 highlight CodiVirtualText guifg=cyan
 hi ColorColumn ctermbg=NONE 
                  hi VertSplit ctermbg=NONE 
@@ -18,4 +34,4 @@ hi ColorColumn ctermbg=NONE
 
 "echo "CODI LOADED"
 
-let g:codi#log = '/home/f1/.local/share/nvim/logs/codi.log'
+let g:codi#log = '/home/f1/logs/nvim-plugins/codi.log'

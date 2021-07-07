@@ -2,34 +2,34 @@ local api = vim.api
 
 
 -- Lwin trigger comand line 
-api.nvim_set_keymap('n', ':', '<Nop>', { noremap = true})
-api.nvim_set_keymap('n', '<F15>', ':', { noremap = true})
-api.nvim_set_keymap('i', '<F15>', [[<c-\><c-n> :]], { noremap = true})
-api.nvim_set_keymap('c', '<F15>', '<cr>', { noremap = true})
+--api.nvim_set_keymap('n', ':', '<Nop>', { noremap = true})
+api.nvim_set_keymap('n', '<F23>', ':', { noremap = true})
+api.nvim_set_keymap('i', '<F23>', [[<c-\><c-n> :]], { noremap = true})
+api.nvim_set_keymap('c', '<F23>', '<cr>', { noremap = true})
 
 
 
 -- floating
 api.nvim_set_keymap('', '<F4>', [[<cmd>luafile %<cr>]], {})
+api.nvim_set_keymap('!', '<F4>', [[<cmd>luafile %<cr>]], {})
 api.nvim_set_keymap('', '<F5>', [[<cmd>lua require('floating').close_all()<cr>]], {})
+api.nvim_set_keymap('!', '<F5>', [[<cmd>lua require('floating').close_all()<cr>]], {})
+api.nvim_set_keymap('', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
+api.nvim_set_keymap('!', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
 
 
 
 -- livetablelogger
-api.nvim_set_keymap('', '<A-3>', [[<cmd>lua require("livetablelogger").open({ view1 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
-api.nvim_set_keymap('!', '<A-3>', [[<cmd>lua require("livetablelogger").open({ view1 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
+-- api.nvim_set_keymap('', '<A-3>', [[<cmd>lua require("livetablelogger").open({ view1 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-3>', [[<cmd>lua require("livetablelogger").open({ view1 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
 
-api.nvim_set_keymap('', '<A-4>', [[<cmd>lua require("livetablelogger").open({ view2 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
-api.nvim_set_keymap('!', '<A-4>', [[<cmd>lua require("livetablelogger").open({ view2 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
-
-
-
-api.nvim_set_keymap('', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<cr>]], {})
-api.nvim_set_keymap('!', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<cr>]], {})
+-- api.nvim_set_keymap('', '<A-4>', [[<cmd>lua require("livetablelogger").open({ view2 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-4>', [[<cmd>lua require("livetablelogger").open({ view2 = { target = 'g_fstate_/home/f1/.config/nvim/init.lua'}})<cr>]], {})
 
 
-api.nvim_set_keymap('', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
-api.nvim_set_keymap('!', '<F6>', [[<cmd>lua require("floating").focus()<cr>]], {})
+
+-- api.nvim_set_keymap('', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-3>f', [[<cmd>lua require("livetablelogger").focus()<cr>]], {})
 
 
 
@@ -89,11 +89,11 @@ api.nvim_set_keymap('t', [[<C-q>]], [[<C-\><C-n><C-q>]], {})
 --api.nvim_set_keymap('!', '<Delete>', 'd "_d', {})
 
 --nnoremom screencol()p <silent> GG :echom screencol()<CR>
-api.nvim_set_keymap('', '<A-8>', [[echom screencol()]], {})
+-- api.nvim_set_keymap('', '<A-8>', [[echom screencol()]], {})
 
 
-api.nvim_set_keymap('', '<A-i>', [[<cmd>lua require("futil").test()<cr>]], {})
-api.nvim_set_keymap('!', '<A-i>', [[<cmd>lua require("futil").test()<cr>]], {})
+-- api.nvim_set_keymap('', '<A-i>', [[<cmd>lua require("futil").test()<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-i>', [[<cmd>lua require("futil").test()<cr>]], {})
 
 -- manual reload whole config
 api.nvim_set_keymap('', '<A-p>', [[<cmd>lua require("futil/resource").resource_init_only()<cr>]], {})
@@ -121,36 +121,36 @@ api.nvim_set_keymap('', '<M-h>', '<Plug>(Luadev-RunLine)<CR>', {})
 api.nvim_set_keymap('n', '<Leader>f', '<cmd>Luadev<cr>', { noremap = true})
 
 
-api.nvim_set_keymap('', '<A-s>q', '<cmd>SClose<cr>', {})
-api.nvim_set_keymap('!', '<A-s>q', '<cmd>SClose<cr>', {})
-api.nvim_set_keymap('', '<A-s>d', '<cmd>SDelete<cr>', {})
-api.nvim_set_keymap('!', '<A-s>d', '<cmd>SDelete<cr>', {})
-api.nvim_set_keymap('', '<A-s>l', '<cmd>SLoad<cr>', {})
-api.nvim_set_keymap('!', '<A-s>l', '<cmd>SLoad<cr>', {})
-api.nvim_set_keymap('', '<A-s>o', '<cmd>SLoad<cr>', {})
-api.nvim_set_keymap('!', '<A-s>o', '<cmd>SLoad<cr>', {})
-api.nvim_set_keymap('', '<A-s>h', '<cmd>Startify<cr>', {})
-api.nvim_set_keymap('!', '<A-s>h', '<cmd>Startify<cr>', {})
-api.nvim_set_keymap('', '<A-s>s', '<cmd>SSave<cr>', {})
-api.nvim_set_keymap('!', '<A-s>s', '<cmd>SSave<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>q', '<cmd>SClose<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>q', '<cmd>SClose<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>d', '<cmd>SDelete<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>d', '<cmd>SDelete<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>l', '<cmd>SLoad<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>l', '<cmd>SLoad<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>o', '<cmd>SLoad<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>o', '<cmd>SLoad<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>h', '<cmd>Startify<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>h', '<cmd>Startify<cr>', {})
+-- api.nvim_set_keymap('', '<A-s>s', '<cmd>SSave<cr>', {})
+-- api.nvim_set_keymap('!', '<A-s>s', '<cmd>SSave<cr>', {})
 
 
 -- snippet stuff
 api.nvim_set_keymap('', '<A-y>', [[<cmd>lua require'futil'.saveSnippet()<cr>]], {})
 api.nvim_set_keymap('!', '<A-y>', [[<cmd>lua require'futil'.saveSnippet()<cr>]], {})
-api.nvim_set_keymap('', '<A-g>', '<cmd>call UltiSnips#ListSnippets()<cr>', {})
-api.nvim_set_keymap('!', '<A-g>', '<cmd>call UltiSnips#ListSnippets()<cr>', {})
+-- api.nvim_set_keymap('', '<A-g>', '<cmd>call UltiSnips#ListSnippets()<cr>', {})
+-- api.nvim_set_keymap('!', '<A-g>', '<cmd>call UltiSnips#ListSnippets()<cr>', {})
 
 
 -- btm window stuff + window manip
-api.nvim_set_keymap('', '<C-`>', [[<cmd>lua require'futil/btmwindow'.toggleBtmWindow()<cr>]], {})
-api.nvim_set_keymap('!', '<C-`>', [[<cmd>lua require'futil/btmwindow'.toggleBtmWindow()<cr>]], {})
+-- api.nvim_set_keymap('', '<C-`>', [[<cmd>lua require'futil/btmwindow'.toggleBtmWindow()<cr>]], {})
+-- api.nvim_set_keymap('!', '<C-`>', [[<cmd>lua require'futil/btmwindow'.toggleBtmWindow()<cr>]], {})
 api.nvim_set_keymap('', '<A-e>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("luapad")<cr>]], {})
 api.nvim_set_keymap('!', '<A-e>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("luapad")<cr>]], {})
-api.nvim_set_keymap('', '<A-t>t', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("fterminal")<cr>]], {})
-api.nvim_set_keymap('!', '<A-t>t', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("fterminal")<cr>]], {})
-api.nvim_set_keymap('', '<A-]>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("quickfix")<cr>]], {})
-api.nvim_set_keymap('!', '<A-]>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("quickfix")<cr>]], {})
+-- api.nvim_set_keymap('', '<A-t>t', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("fterminal")<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-t>t', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("fterminal")<cr>]], {})
+-- api.nvim_set_keymap('', '<A-]>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("quickfix")<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-]>', [[<cmd>lua require'futil/btmwindow'.toggle_btm_win_single("quickfix")<cr>]], {})
 -- api.nvim_set_keymap('', '<A-1>', '<cmd>lua require("futil/window").focusWindow(1)<cr>', {})
 -- api.nvim_set_keymap('!', '<A-1>', '<cmd>lua require("futil/window").focusWindow(1)<cr>', {})
 -- api.nvim_set_keymap('', '<A-2>', '<cmd>lua require("futil/window").focusWindow(2)<cr>', {})

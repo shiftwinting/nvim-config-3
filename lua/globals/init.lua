@@ -1,7 +1,6 @@
 local printoutput = require'futil/printoutput'
---local log1 = require'log1'
-local log = require'futil/log'
 local log1 = require'log1'
+
 
 
 
@@ -48,9 +47,9 @@ function _G.dump(...)
 end
 
 
-ltl = require'livetablelogger'.log
+--ltl = require'livetablelogger'.log
 
-ftest = ltl('test', {})
+--ftest = ltl('test', {})
 
 
 

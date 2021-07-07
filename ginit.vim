@@ -23,8 +23,8 @@ let g:neovide_transparency=1
 
 
 " set font for neovide
-"  set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h14
+"set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h14
 "set guifont=CaskaydiaCove\ Nerd\ Font:h14
  "set guifont=Cantarell-Light:h14
 
-set guifont=MergedCascadia4:h14
+"set guifont=MergedCascadia4:h14
